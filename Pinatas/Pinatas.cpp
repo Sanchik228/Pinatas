@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 int maxCandies(std::vector<int>& p, int left, int right) {
 	if (left > right) return 0;
@@ -16,10 +17,25 @@ int maxCandies(std::vector<int>& p, int left, int right) {
 }
 
 int main() {
-	std::vector<int> pinates = { 1, 3, 1, 5, 8, 1 }; //"1" at the begin and end!
-	int result = maxCandies(pinates, 1, 4);
+    std::cout << "Enter pinata values separated by space: ";
+    std::string line;
+    std::getline(std::cin, line);
 
-	std::cout << "Maximum candies: " << result << std::endl;
+    std::stringstream ss(line);
+    int val;
+    std::vector<int> pinatas;
 
-	return 0;
+    while (ss >> val) {
+        pinatas.push_back(val);
+    }
+
+    pinatas.insert(pinatas.begin(), 1);
+    pinatas.push_back(1);
+
+    int n = pinatas.size();
+
+    int result = maxCandies(pinatas, 1, n - 2);
+    std::cout << "Maximum candies: " << result << std::endl;
+
+    return 0;
 }
